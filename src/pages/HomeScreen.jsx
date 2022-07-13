@@ -1,13 +1,55 @@
-import Busqueda from "components/Busqueda"
-import CrearNave from "components/CrearNave"
-import { Fragment } from "react"
+import Busqueda from "components/Busqueda";
+import { Fragment, useEffect, useState } from "react";
+import { fetchNotripulado } from "helpers/fetch";
+import { Link } from "react-router-dom";
+import Button from "components/ui/Button";
 
 const HomeScreen = () => {
+  const [dataNoTripulado, setDataNoTripulado] = useState([]);
+  const [dataTripulado, setDataTripulado] = useState([]);
+  const [dataLanzadera, setDataLanzadera] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetchNotripulado('/naveNoTripulada').then(data => {
+      setDataNoTripulado(data);
+    }).catch(err => {
+      console.log(err);
+    }).finally(() => {
+      console.log("finally");
+      setLoading(false);
+    }
+    );
+  }, []);
+
+  useEffect(() => {
+    fetchNotripulado('/naveTripulada').then(data => {
+      setDataTripulado(data);
+    }).catch(err => {
+      console.log(err);
+    }).finally(() => {
+      console.log("finally");
+      setLoading(false);
+    }
+    );
+  }, []);
+
+  useEffect(() => {
+    fetchNotripulado('/naveLanzadera').then(data => {
+      setDataLanzadera(data);
+    }).catch(err => {
+      console.log(err);
+    }).finally(() => {
+      setLoading(false);
+    }
+    );
+  }, []);
+
   return (
     <Fragment>
       <h1 className="text-center title-style">Estación espacial Softka</h1>
       <div className="flex justify-between">
-        <CrearNave />
+        <Button texto='Crear nave espacial' url="/crearNave" />
         <Busqueda />
       </div>
       <div className="divider"></div>
@@ -21,31 +63,73 @@ const HomeScreen = () => {
               <th>Peso</th>
             </tr>
           </thead>
-          <tbody>
-            {/* <!-- row 1 --> */}
-            <tr>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Hart Hagerty</div>
-                    <div className="text-sm opacity-50">United States</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Zemlak, Daniel and Leannon
-              </td>
-              <td>este es el peso</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">Detalles</button>
-              </th>
-            </tr>
-          </tbody>         
+          {loading ? (<div>Loading...</div>) : (
+            <tbody>
+              {dataNoTripulado.map(nave => {
+                return (
+                  <tr key={nave._id}>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div>
+                          <div className="font-bold">{nave.nombre}</div>
+                          <div className="text-sm opacity-50">{nave.pais}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{nave.tipo}</td>
+                    <td>{nave.peso}KG</td>
+                    <th>
+                      <Link to={`/naveNoTripulada/${nave._id}`}
+                        className="btn btn-ghost btn-xs">Detalles
+                      </Link>
+                    </th>
+                  </tr>
+                )
+              })}
+              {dataTripulado.map(nave => {
+                return (
+                  <tr key={nave._id}>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div>
+                          <div className="font-bold">{nave.nombre}</div>
+                          <div className="text-sm opacity-50">{nave.pais}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{nave.tipo}</td>
+                    <td>{nave.peso}KG</td>
+                    <th>
+                      <Link to={`/naveTripulada/${nave._id}`}
+                        className="btn btn-ghost btn-xs">Detalles
+                      </Link>
+                    </th>
+                  </tr>
+                )
+              })}
+              {dataLanzadera.map(nave => {
+                return (
+                  <tr key={nave._id}>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div>
+                          <div className="font-bold">{nave.nombre}</div>
+                          <div className="text-sm opacity-50">{nave.pais}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{nave.tipo}</td>
+                    <td>{nave.peso}KG</td>
+                    <th>
+                      <Link to={`/naveLanzadera/${nave._id}`}
+                        className="btn btn-ghost btn-xs">Detalles
+                      </Link>
+                    </th>
+                  </tr>
+                )
+              })}
+            </tbody>
+          )}
         </table>
       </div>
     </Fragment>

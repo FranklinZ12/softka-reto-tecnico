@@ -10,7 +10,7 @@ const HomeScreen = () => {
         <CrearNave />
         <Busqueda />
       </div>
-      <div class="divider"></div>
+      <div className="divider"></div>
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
           {/* <!-- head --> */}

@@ -4,6 +4,7 @@ import { fetchNaves } from "helpers/fetch";
 import Button from "components/ui/Button";
 import Tbody from "components/homeScreen/Tbody";
 import ReactLoading from 'react-loading';
+import 'animate.css';
 
 const HomeScreen = () => {
   const [dataNoTripulado, setDataNoTripulado] = useState([]);
@@ -88,8 +89,10 @@ const HomeScreen = () => {
       </div>
       <div className="divider"></div>
       <div className="overflow-x-auto w-full">
-          {loading ? (<ReactLoading type={'SpinningBubbles'} color={'#5a297e'} height={'50%'} width={'50%'} />) : (
-        <table className="table w-full">
+        {loading ? (<div className="flex justify-center items-center"><ReactLoading 
+          type='SpinningBubbles'color='#5a297e'
+          height={200} width={150} /></div>) : (
+        <table className="table w-full ">
           {/* <!-- head --> */}
           <thead>
             <tr>
@@ -98,7 +101,7 @@ const HomeScreen = () => {
               <th>Peso</th>
             </tr>
           </thead>
-            <tbody>
+              <tbody className="animate__animated animate__backInUp">
               {navesFiltradas.map(nave => {
                 return (
                   <tr key={nave._id}>

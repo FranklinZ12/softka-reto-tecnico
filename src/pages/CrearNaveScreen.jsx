@@ -10,7 +10,7 @@ const CrearNaveScreen = () => {
   };
 
   return (
-    <section className='section-crearNave'>
+    <section className='section-crearNave animate__animated animate__backInLeft'>
       <button
         onClick={handleReturn}
         className='btn gradient-btn md:bottom-64'

@@ -1,6 +1,6 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { fetchPost } from 'helpers/fetch';
-import { SignupSchema } from 'utils/validation';
+import { SignupSchemaLanzadera } from 'utils/validation';
 
 const initialValuesLanzadera = {
     nombre: "",
@@ -15,6 +15,7 @@ const FormLanzadera = () => {
   return (
       <Formik
           initialValues={initialValuesLanzadera}
+          validationSchema={SignupSchemaLanzadera}
           onSubmit={async (values, { setSubmitting }) => {
               fetchPost('/naveLanzadera', values)
                   .then(res => {

@@ -10,19 +10,19 @@ const CardList = () => {
             <CardNave
                 img={lanzadera}
                 title="VEHÍCULOS LANZADERA"
-                text="If a dog chews shoes whose shoes does he choose?"
+                text="Como su propio nombre indica, se trata de un cohete autopropulsado que sirve para lanzar una carga útil al espacio."
                 htmlf={'my-modal'}
             />
             <CardNave
                 img={noTripulada}
                 title="NAVES ESPACIALES NO TRIPULADAS"
-                text="If a dog chews shoes whose shoes does he choose?"
+                text="En cuanto a naves no tripuladas se refiere, su principal objetivo estriba en estudiar otros cuerpos celestes. Por eso las primeras de la historia tenían como finalidad estudiar a nuestro satélite natural."
                 htmlf={'my-modal-1'}
             />
             <CardNave
                 img={tripulada}
                 title="NAVES ESPACIALES TRIPULADAS"
-                text="If a dog chews shoes whose shoes does he choose?"
+                text="Resulta meridiano que su propósito consiste en mandar seres humanos al espacio para tareas de reparación, mantenimiento o investigación."
                 tamaño={700}
                 htmlf={'my-modal-2'}
             />

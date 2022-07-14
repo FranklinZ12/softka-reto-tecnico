@@ -1,7 +1,7 @@
 
 const Busqueda = ({ setBusqueda, busqueda }) => {
     return (
-        <div className="form-control">
+        <div className="form-control animate__animated animate__backInRight">
             <div className="input-group">
                 <input type="search"
                     value={busqueda}

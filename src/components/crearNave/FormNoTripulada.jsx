@@ -1,6 +1,8 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { fetchPost } from 'helpers/fetch';
 import { SignupSchemaNoTripulado } from 'utils/validation';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const initialValuesNoTripulada = {
     nombre: "",
@@ -11,6 +13,15 @@ const initialValuesNoTripulada = {
     objetivo: "",
 }
 const FormNoTripulada = () => {
+    const notificacion = () => toast.success('🦄 Nave creada con exito.', {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
     return (
         <Formik
             initialValues={initialValuesNoTripulada}
@@ -18,8 +29,10 @@ const FormNoTripulada = () => {
             onSubmit={async (values, { setSubmitting }) => {
                 fetchPost('/naveNoTripulada', values)
                     .then(res => {
-                        console.log(res)
-                        setSubmitting(false)
+                        if (res.ok) {
+                            notificacion()
+                            setSubmitting(false)
+                        }
                     })
                     .catch(err => {
                         console.log(err)

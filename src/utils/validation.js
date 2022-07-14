@@ -64,11 +64,12 @@ export const SignupSchemaTripulado = Yup.object().shape({
         .min(1, '¡Altura muy corta!')
         .max(3, '¡Altura muy larga!')
         .required('Requerido'),
-    capacidadPersona: Yup.string()
+    capacidadPersonas: Yup.string()
         .min(1, '¡Capacidad de persona muy corta!')
         .max(3, '¡Capacidad de persona muy larga!')
         .required('Requerido'),
     objetivo: Yup.string()
         .min(1, '¡Objetivo muy corto!')
-        .max(41, '¡Objetivo muy largo!')
+        .max(20, '¡Objetivo muy largo!')
+        .required('Requerido'),
 });

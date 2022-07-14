@@ -1,6 +1,8 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { fetchPost } from 'helpers/fetch';
 import { SignupSchemaLanzadera } from 'utils/validation';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const initialValuesLanzadera = {
     nombre: "",
@@ -11,6 +13,15 @@ const initialValuesLanzadera = {
     empuje: "",
 }
 
+const notificacion = () => toast.success('🦄 Nave creada con exito.', {
+    position: "top-right",
+    autoClose: 2500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+});
 const FormLanzadera = () => {
   return (
       <Formik
@@ -19,8 +30,10 @@ const FormLanzadera = () => {
           onSubmit={async (values, { setSubmitting }) => {
               fetchPost('/naveLanzadera', values)
                   .then(res => {
-                      console.log(res)
-                      setSubmitting(false)
+                    if(res.ok){
+                        notificacion()
+                        setSubmitting(false)
+                    }
                   })
                   .catch(err => {
                       console.log(err)

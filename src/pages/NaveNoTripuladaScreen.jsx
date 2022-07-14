@@ -68,10 +68,10 @@ const NaveNoTripuladaScreen = () => {
                 <strong>Altura:</strong> {altura} (m).
               </li>
               <li>
-                <strong>Empuje:</strong> {empuje} (TON).
+                <strong>Empuje:</strong> {empuje} (kg).
               </li>
               <li>
-                <strong>Peso:</strong> {peso} (TON).
+                <strong>Peso:</strong> {peso} (kg).
               </li>
               <li>
                 <strong>Estado:</strong> {estado}.

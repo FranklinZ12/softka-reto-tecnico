@@ -2,6 +2,7 @@ import CardList from 'components/crearNave/CardList';
 import { useNavigate } from 'react-router-dom';
 import 'styles/crearNave/crearNave.css';
 import 'styles/ui/button.css';
+
 const CrearNaveScreen = () => {
   const navigate = useNavigate();
 

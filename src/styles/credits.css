@@ -11,10 +11,10 @@
 }
 
 .credits a {
-    color: #18d26e;
+    color: #6F00D0;
     transition: 0.3s;
 }
 
-.credits a:hover {
-    @apply text-white;
+.credits a:hover{
+    color: rgba(255, 62, 162, 1);
 }

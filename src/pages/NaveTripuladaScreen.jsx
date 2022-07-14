@@ -5,6 +5,8 @@ import tripulada from 'assets/tripulada.jpg';
 import 'styles/ui/img-nave.css';
 import 'styles/cardNaveID.css';
 import "styles/ui/button.css"
+import ReactLoading from 'react-loading';
+import Loading from "components/ui/Loading";
 
 const NaveTripuladaScreen = () => {
   const { naveID } = useParams();
@@ -38,12 +40,13 @@ const NaveTripuladaScreen = () => {
     tipo
   } = data;
 
+  //funcion para volver a la pantalla anterior (la de las naves en la tabla)
   const handleReturn = () => {
     navigate(-1);
   };
 
   if (loading) {
-    return <div>Loading...</div>
+    return <Loading type='spinningBubbles'/>
   }
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl p-14">
@@ -55,22 +58,22 @@ const NaveTripuladaScreen = () => {
           <h3 className='mb-1 font-medium text-3xl'>{nombre}</h3>
           <ul className='flex-col pl-0 mb-0 lista'>
             <li>
-              <strong>Tipo:</strong> {tipo}
+              <strong>Tipo:</strong> {tipo}.
             </li>
             <li>
-              <strong>Altura:</strong> {altura}
+              <strong>Altura:</strong> {altura} (m).
             </li>
             <li>
-              <strong>Capacidad de personas:</strong> {capacidadPersonas}
+              <strong>Capacidad de personas:</strong> {capacidadPersonas}.
             </li>
             <li>
-              <strong>Peso:</strong> {peso}
+              <strong>Peso:</strong> {peso} (TON).
             </li>
             <li>
-              <strong>Objetivo:</strong> {objetivo}
+              <strong>Objetivo:</strong> {objetivo}.
             </li>
             <li>
-              <strong>Pais:</strong> {pais}
+              <strong>Pais:</strong> {pais}.
             </li>
           </ul>
         </div>

@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 
-
 const Tbody = ({ nombre, pais, tipo, peso}) => {
   return (
     <Fragment>
@@ -13,7 +12,7 @@ const Tbody = ({ nombre, pais, tipo, peso}) => {
               </div>
           </td>
           <td>{tipo}</td>
-          <td>{peso}TON</td>
+          <td className="hidden sm:flex">{peso} (TON)</td>
       </Fragment>
   )
 }

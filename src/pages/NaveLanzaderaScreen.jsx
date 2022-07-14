@@ -6,6 +6,7 @@ import 'styles/ui/img-nave.css';
 import 'styles/cardNaveID.css';
 import "styles/ui/button.css"
 import ReactLoading from 'react-loading';
+import Loading from 'components/ui/Loading';
 
 const NaveLanzaderaScreen = () => {
   const { naveID } = useParams();
@@ -44,7 +45,7 @@ const NaveLanzaderaScreen = () => {
   };
 
   if (loading) {
-    return <ReactLoading type={'SpinningBubbles'} color={'#5a297e'} height={'50%'} width={'50%'} />
+    return <Loading type='spinningBubbles' />
   }
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl p-14">
@@ -56,22 +57,22 @@ const NaveLanzaderaScreen = () => {
           <h3 className='mb-1 font-medium text-3xl'>{nombre}</h3>
           <ul className='flex-col pl-0 mb-0 lista'>
             <li>
-              <strong>Tipo:</strong> {tipo}
+              <strong>Tipo:</strong> {tipo}.
             </li>
             <li>
-              <strong>Altura:</strong> {altura} m
+              <strong>Altura:</strong> {altura} (m).
             </li>
             <li>
-              <strong>Empuje:</strong> {empuje} TON
+              <strong>Empuje:</strong> {empuje} (TON).
             </li>
             <li>
-              <strong>Peso:</strong> {peso} TON
+              <strong>Peso:</strong> {peso} (TON).
             </li>
             <li>
-              <strong>Peso de carga:</strong> {pesoCarga} TON
+              <strong>Peso de carga:</strong> {pesoCarga} (TON).
             </li>
             <li>
-              <strong>Pais:</strong> {pais}
+              <strong>Pais:</strong> {pais}.
             </li>
           </ul>
         </div>

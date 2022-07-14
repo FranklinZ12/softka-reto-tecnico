@@ -3,8 +3,8 @@ import { Fragment, useEffect, useState } from "react";
 import { fetchNaves } from "helpers/fetch";
 import Button from "components/ui/Button";
 import Tbody from "components/homeScreen/Tbody";
-import ReactLoading from 'react-loading';
 import 'animate.css';
+import Loading from "components/ui/Loading";
 
 const HomeScreen = () => {
   const [dataNoTripulado, setDataNoTripulado] = useState([]);
@@ -12,10 +12,12 @@ const HomeScreen = () => {
   const [dataLanzadera, setDataLanzadera] = useState([]);
   const [loading, setLoading] = useState(false);
   const [busqueda, setBusqueda] = useState("");
-  const [navesFiltradas, setNavesFiltradas] = useState(dataNoTripulado);
+  const [navesFiltradasNoTripuladas, setNavesFiltradas] = useState(dataNoTripulado);
   const [navesFiltradasTripulado, setNavesFiltradasTripulado] = useState(dataTripulado);
   const [navesFiltradasLanzadera, setNavesFiltradasLanzadera] = useState(dataLanzadera);
 
+  //fetch's a la api para obtener las naves no tripuladas, las naves tripuladas 
+  //y las naves lanzadera y las guarda en los estados correspondientes.
   useEffect(() => {
     setLoading(true);
     fetchNaves('/naveNoTripulada').then(data => {
@@ -52,6 +54,9 @@ const HomeScreen = () => {
     );
   }, []);
 
+  //funcion para filtrar las naves por el campo de busqueda y guardarlas en el state de 
+  //navesFiltradasNoTripuladas, navesFiltradasTripulado y navesFiltradasLanzadera
+  //para que se puedan usar en el componente Tbody.
   useEffect(() => {
     if (busqueda !== "") {
       setNavesFiltradas(
@@ -89,20 +94,18 @@ const HomeScreen = () => {
       </div>
       <div className="divider"></div>
       <div className="overflow-x-auto w-full">
-        {loading ? (<div className="flex justify-center items-center"><ReactLoading 
-          type='SpinningBubbles'color='#5a297e'
-          height={200} width={150} /></div>) : (
+        {loading ? (<Loading type='bars' />) : (
         <table className="table w-full ">
           {/* <!-- head --> */}
           <thead>
             <tr>
               <th>Nombre</th>
               <th>Tipo de vehiculo espacial</th>
-              <th>Peso</th>
+              <th className="hidden sm:flex">Peso</th>
             </tr>
           </thead>
               <tbody className="animate__animated animate__backInUp">
-              {navesFiltradas.map(nave => {
+              {navesFiltradasNoTripuladas.map(nave => {
                 return (
                   <tr key={nave._id}>
                     <Tbody nombre={nave.nombre}

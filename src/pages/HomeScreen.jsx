@@ -10,6 +10,10 @@ const HomeScreen = () => {
   const [dataTripulado, setDataTripulado] = useState([]);
   const [dataLanzadera, setDataLanzadera] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [busqueda, setBusqueda] = useState("");
+  const [navesFiltradas, setNavesFiltradas] = useState(dataNoTripulado);
+  const [navesFiltradasTripulado, setNavesFiltradasTripulado] = useState(dataTripulado);
+  const [navesFiltradasLanzadera, setNavesFiltradasLanzadera] = useState(dataLanzadera);
 
   useEffect(() => {
     setLoading(true);
@@ -47,12 +51,40 @@ const HomeScreen = () => {
     );
   }, []);
 
+  useEffect(() => {
+    if (busqueda !== "") {
+      setNavesFiltradas(
+        dataNoTripulado.filter(nave => {
+          return JSON.stringify(nave).toLowerCase().includes(busqueda.toLowerCase())}));
+    }else{
+      setNavesFiltradas(dataNoTripulado);
+    } 
+
+    if (busqueda !== "") {
+      setNavesFiltradasTripulado(
+        dataTripulado.filter(nave => {
+          return JSON.stringify(nave).toLowerCase().includes(busqueda.toLowerCase())
+        }));
+    } else {
+      setNavesFiltradasTripulado(dataTripulado);
+    }
+
+    if (busqueda !== "") {
+      setNavesFiltradasLanzadera(
+        dataLanzadera.filter(nave => {
+          return JSON.stringify(nave).toLowerCase().includes(busqueda.toLowerCase())
+        }));
+    } else {
+      setNavesFiltradasLanzadera(dataLanzadera);
+    }
+  }, [busqueda, dataNoTripulado, dataTripulado, dataLanzadera]);
+
   return (
     <Fragment>
       <h1 className="text-center title-style">Estación espacial Softka</h1>
       <div className="flex justify-between">
         <Button texto='Crear nave espacial' url="/crearNave" />
-        <Busqueda />
+        <Busqueda setBusqueda={setBusqueda} busqueda={busqueda}/>
       </div>
       <div className="divider"></div>
       <div className="overflow-x-auto w-full">
@@ -67,7 +99,7 @@ const HomeScreen = () => {
             </tr>
           </thead>
             <tbody>
-              {dataNoTripulado.map(nave => {
+              {navesFiltradas.map(nave => {
                 return (
                   <tr key={nave._id}>
                     <Tbody nombre={nave.nombre}
@@ -79,7 +111,7 @@ const HomeScreen = () => {
                   </tr>
                 )
               })}
-              {dataTripulado.map(nave => {
+              {navesFiltradasTripulado.map(nave => {
                 return (
                   <tr key={nave._id}>
                     <Tbody nombre={nave.nombre}
@@ -91,7 +123,7 @@ const HomeScreen = () => {
                   </tr>
                 )
               })}
-              {dataLanzadera.map(nave => {
+              {navesFiltradasLanzadera.map(nave => {
                 return (
                   <tr key={nave._id}>
                     <Tbody nombre={nave.nombre}

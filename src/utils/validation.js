@@ -21,7 +21,7 @@ export const SignupSchemaLanzadera = Yup.object().shape({
         .required('Requerido'),
     empuje: Yup.string()
         .min(1, '¡Empuje muy corto!')
-        .max(3, '¡Empuje muy largo!')
+        .max(4, '¡Empuje muy largo!')
         .required('Requerido'),
 });
 

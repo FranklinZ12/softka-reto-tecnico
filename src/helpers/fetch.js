@@ -1,19 +1,19 @@
 const baseUrl = process.env.REACT_APP_API_URI;
 
 const fetchNaves = async(endpoint)=>{
-    const respuesta = await fetch(`https://api-softk-reto.herokuapp.com/api${endpoint}`);
+    const respuesta = await fetch(`${baseUrl}${endpoint}`);
     const data = await respuesta.json();
     return data;
 }
 
 const fetchNavesById = async(endpoint)=>{
-    const respuesta = await fetch(`https://api-softk-reto.herokuapp.com/api${endpoint}`);
+    const respuesta = await fetch(`${baseUrl}${endpoint}`);
     const data = await respuesta.json();
     return data;
 }
 
 const fetchPost = async(endpoint, data)=>{
-    const respuesta = await fetch(`https://api-softk-reto.herokuapp.com/api${endpoint}`, {
+    const respuesta = await fetch(`${baseUrl}${endpoint}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

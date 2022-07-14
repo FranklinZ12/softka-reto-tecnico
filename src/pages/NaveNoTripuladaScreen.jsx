@@ -30,7 +30,7 @@ const NaveNoTripuladaScreen = () => {
         setLoading(false);
       }
       );
-  }, [])
+  }, [naveID, navigate]);
 
   const { altura,
     empuje,

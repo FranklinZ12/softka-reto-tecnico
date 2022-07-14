@@ -5,7 +5,6 @@ import Lanzadera from 'assets/lanzadera.jpg';
 import 'styles/ui/img-nave.css';
 import 'styles/cardNaveID.css';
 import "styles/ui/button.css"
-import ReactLoading from 'react-loading';
 import Loading from 'components/ui/Loading';
 
 const NaveLanzaderaScreen = () => {
@@ -28,7 +27,7 @@ const NaveLanzaderaScreen = () => {
         setLoading(false);
       }
       );
-  }, [])
+  }, [naveID, navigate]);
 
   const { altura,
     empuje,

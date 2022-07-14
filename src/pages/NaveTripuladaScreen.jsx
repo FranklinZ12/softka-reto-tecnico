@@ -5,7 +5,6 @@ import tripulada from 'assets/tripulada.jpg';
 import 'styles/ui/img-nave.css';
 import 'styles/cardNaveID.css';
 import "styles/ui/button.css"
-import ReactLoading from 'react-loading';
 import Loading from "components/ui/Loading";
 
 const NaveTripuladaScreen = () => {
@@ -28,7 +27,7 @@ const NaveTripuladaScreen = () => {
         setLoading(false);
       }
       );
-  }, [])
+  }, [naveID, navigate]);
 
   const { altura,
     nombre,

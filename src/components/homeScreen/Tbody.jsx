@@ -12,7 +12,7 @@ const Tbody = ({ nombre, pais, tipo, peso}) => {
               </div>
           </td>
           <td>{tipo}</td>
-          <td className="hidden sm:flex">{peso} (TON)</td>
+          <td className="hidden sm:flex">{peso}{tipo === 'Nave robótica'? '(kg)':'(TON)'}</td>
       </Fragment>
   )
 }

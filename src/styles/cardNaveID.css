@@ -1,0 +1,3 @@
+.lista > li{
+    @apply py-2 md:px-7 md:py-5 -mb-[1px];
+}

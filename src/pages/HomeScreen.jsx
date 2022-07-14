@@ -1,8 +1,9 @@
 import Busqueda from "components/Busqueda";
 import { Fragment, useEffect, useState } from "react";
-import { fetchNotripulado } from "helpers/fetch";
-import { Link } from "react-router-dom";
+import { fetchNaves } from "helpers/fetch";
 import Button from "components/ui/Button";
+import Tbody from "components/homeScreen/Tbody";
+import ReactLoading from 'react-loading';
 
 const HomeScreen = () => {
   const [dataNoTripulado, setDataNoTripulado] = useState([]);
@@ -11,31 +12,32 @@ const HomeScreen = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchNotripulado('/naveNoTripulada').then(data => {
+    setLoading(true);
+    fetchNaves('/naveNoTripulada').then(data => {
       setDataNoTripulado(data);
     }).catch(err => {
       console.log(err);
     }).finally(() => {
-      console.log("finally");
       setLoading(false);
     }
     );
   }, []);
 
   useEffect(() => {
-    fetchNotripulado('/naveTripulada').then(data => {
+    setLoading(true);
+    fetchNaves('/naveTripulada').then(data => {
       setDataTripulado(data);
     }).catch(err => {
       console.log(err);
     }).finally(() => {
-      console.log("finally");
       setLoading(false);
     }
     );
   }, []);
 
   useEffect(() => {
-    fetchNotripulado('/naveLanzadera').then(data => {
+    setLoading(true);
+    fetchNaves('/naveLanzadera').then(data => {
       setDataLanzadera(data);
     }).catch(err => {
       console.log(err);
@@ -54,6 +56,7 @@ const HomeScreen = () => {
       </div>
       <div className="divider"></div>
       <div className="overflow-x-auto w-full">
+          {loading ? (<ReactLoading type={'SpinningBubbles'} color={'#5a297e'} height={'50%'} width={'50%'} />) : (
         <table className="table w-full">
           {/* <!-- head --> */}
           <thead>
@@ -63,25 +66,15 @@ const HomeScreen = () => {
               <th>Peso</th>
             </tr>
           </thead>
-          {loading ? (<div>Loading...</div>) : (
             <tbody>
               {dataNoTripulado.map(nave => {
                 return (
                   <tr key={nave._id}>
-                    <td>
-                      <div className="flex items-center space-x-3">
-                        <div>
-                          <div className="font-bold">{nave.nombre}</div>
-                          <div className="text-sm opacity-50">{nave.pais}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>{nave.tipo}</td>
-                    <td>{nave.peso}KG</td>
+                    <Tbody nombre={nave.nombre}
+                      pais={nave.pais} tipo={nave.tipo} peso={nave.peso}
+                    />
                     <th>
-                      <Link to={`/naveNoTripulada/${nave._id}`}
-                        className="btn btn-ghost btn-xs">Detalles
-                      </Link>
+                      <Button texto='Detalles' url={`/naveNoTripulada/${nave._id}`} />
                     </th>
                   </tr>
                 )
@@ -89,20 +82,11 @@ const HomeScreen = () => {
               {dataTripulado.map(nave => {
                 return (
                   <tr key={nave._id}>
-                    <td>
-                      <div className="flex items-center space-x-3">
-                        <div>
-                          <div className="font-bold">{nave.nombre}</div>
-                          <div className="text-sm opacity-50">{nave.pais}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>{nave.tipo}</td>
-                    <td>{nave.peso}KG</td>
+                    <Tbody nombre={nave.nombre}
+                      pais={nave.pais} tipo={nave.tipo} peso={nave.peso}
+                    />
                     <th>
-                      <Link to={`/naveTripulada/${nave._id}`}
-                        className="btn btn-ghost btn-xs">Detalles
-                      </Link>
+                      <Button texto='Detalles' url={`/naveTripulada/${nave._id}`} />
                     </th>
                   </tr>
                 )
@@ -110,27 +94,18 @@ const HomeScreen = () => {
               {dataLanzadera.map(nave => {
                 return (
                   <tr key={nave._id}>
-                    <td>
-                      <div className="flex items-center space-x-3">
-                        <div>
-                          <div className="font-bold">{nave.nombre}</div>
-                          <div className="text-sm opacity-50">{nave.pais}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>{nave.tipo}</td>
-                    <td>{nave.peso}KG</td>
+                    <Tbody nombre={nave.nombre}
+                      pais={nave.pais} tipo={nave.tipo} peso={nave.peso}
+                    />
                     <th>
-                      <Link to={`/naveLanzadera/${nave._id}`}
-                        className="btn btn-ghost btn-xs">Detalles
-                      </Link>
+                      <Button texto='Detalles' url={`/naveLanzadera/${nave._id}`} />
                     </th>
                   </tr>
                 )
               })}
             </tbody>
-          )}
         </table>
+          )}
       </div>
     </Fragment>
   )

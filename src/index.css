@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply px-11;
+  @apply p-2 md:px-11;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

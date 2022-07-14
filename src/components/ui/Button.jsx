@@ -3,7 +3,7 @@ import "styles/ui/button.css"
 const Button = ({ texto, url }) => {
     return (
         <Link to={url}
-            className="btn gradient-btn"
+            className={texto !== 'Detalles' ? `btn gradient-btn` :'btn btn-ghost btn-xs'}
         >
             {texto}
         </Link>
